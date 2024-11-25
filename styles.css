@@ -1,0 +1,54 @@
+#gameboard {
+    width: 336px;
+    height: 320px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: black;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+}
+
+.square {
+    height: 40px;
+    width: 40px;
+    position: relative;
+}
+
+.square svg {
+    height: 30px;
+    width: 30px;
+    margin: 5px;
+    position: relative;
+    z-index: -9;
+}
+
+path {
+    position: relative;
+    z-index: -10;
+}
+
+.piece {
+    position: relative;
+    z-index: 9;
+}
+
+.beige {
+    background-color: rgb(110, 110, 98);
+    background-color: rgb(200, 200, 194);
+
+    /* border: 1px solid #222; */
+}
+
+.brown {
+    background-color: rgb(8, 94, 65);
+}
+
+.black {
+    fill: #000;
+}
+
+.white {
+    fill: #ffffffe1;
+    box-shadow: 4px 4px 16px #00000050;
+}
