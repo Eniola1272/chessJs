@@ -67,10 +67,35 @@ function dragOver(e) {
 
 function dragDrop(e) {
     e.stopPropagation()
-
+    console.log(e.target);
+    const correctGo = draggedElement.firstChild.classList.contains(playerGo)
     const taken = e.target.classList.contains('piece')
-    // e.target.parentNode.append(draggedElement)
-    // e.target.remove
+    const valid = checkIfValid(e.target)
+    const opponentGo = playerGo === 'white' ? 'black' : 'white'
+    const takenByOpponent =  e.target.firstChild?.classList.contains(opponentGo)
+
+    if (correctGo) {
+        // must check this first
+        if (takenByOpponent && valid) {
+            e.target.parentNode.append(draggedElement)
+            e.target.remove()
+            changePlayer()
+            return
+        }
+
+        // then check this
+        if (taken && !takenByOpponent) {
+            infoDisplay.textContent = 'you cannot go there!'
+            setTimeout(() => infoDisplay.textContent = "", 2000)
+            return
+        }
+
+        if (valid) {
+            e.target.append(draggedElement)
+            changePlayer()
+            return
+        }
+    }
     // e.target.append(draggedElement)
     changePlayer()
 }  
@@ -95,4 +120,10 @@ function reverseIds() {
 function revertIds() {
     const allSquares = document.querySelectorAll('.square')
     allSquares.forEach((square, i) => square.setAttribute('square-id', i))
+}
+
+function checkIfValid(e) {
+    const targetId = Number(e.getAttribute('square-id')) || Number(e.parentNode.getAttribute('square-id'))
+    console.log(targetId);
+    
 }
